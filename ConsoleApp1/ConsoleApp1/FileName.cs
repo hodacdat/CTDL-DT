@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Numerics;
@@ -176,11 +177,93 @@ public class Solution
     /// <param name="args"></param>
     /// 
     // check array has odd-length
-    public bool checkOddLength(int[] array)
+    //public List<List<int>> getAllOddLengthsArr(int[] array)
+    //{
+    //    List<List<int>> result = new List<List<int>>();
+
+    //    for (int length = 1; length <= array.Length; length += 2)
+    //    {
+    //        for (int start = 0; start + length <= array.Length; start++)
+    //        {
+    //            List<int> subArray = new List<int>();
+    //            for (int i = start; i < start + length; i++)
+    //            {
+    //                subArray.Add(array[i]);
+    //            }
+    //            result.Add(subArray);
+    //        }
+    //    }
+    //    return result;
+    //}
+
+    //public int SumOddLengthSubarrays(int[] arr)
+    //{
+    //    int sum = 0;
+    //    List<List<int>> list = getAllOddLengthsArr(arr);
+    //    foreach (List<int> list2 in list)
+    //    {
+    //        foreach (var item in list2)
+    //        {
+    //            sum += item;
+    //        };
+
+    //    }
+    //    return sum;
+    //}
+
+
+    /*
+     You are given a 1-indexed integer array nums of length n.
+    An element nums[i] of nums is called special if i divides n, i.e. n % i == 0.
+    Return the sum of the squares of all special elements of nums.
+
+    Example 1:
+
+    Input: nums = [1,2,3,4]
+    Output: 21
+    Explanation: There are exactly 3 special elements in nums: 
+    nums[1] since 1 divides 4, nums[2] since 2 divides 4, and nums[4] since 4 divides 4. 
+    Hence, the sum of the squares of all special elements of nums is
+    nums[1] * nums[1] + nums[2] * nums[2] + nums[4] * nums[4] = 1 * 1 + 2 * 2 + 4 * 4 = 21.  
+     */
+
+    public int SumOfSquares(int[] nums)
     {
-        if (array.Length % 2 != 0)
+        int sum = 0;
+        int lenght = nums.Length;
+        for (int i = 1; i <= nums.Length; i++)
         {
-            return true;
+            if (lenght % i == 0)
+            {
+                sum += (nums[i - 1] * nums[i - 1]);
+            }
+        }
+
+        return sum;
+    }
+
+    /*
+    Given a non-negative integer c, decide whether there're two integers a and b such that a2 + b2 = c.
+     
+    Example 1:
+    Input: c = 5
+    Output: true
+    Explanation: 1 * 1 + 2 * 2 = 5
+    
+    Example 2:
+    Input: c = 3
+    Output: false
+    */
+
+    public bool JudgeSquareSum(int c)
+    {
+        long left = 0, right = (long)Math.Sqrt(c);
+        while (left <= right)
+        {
+            long temp = left * left + right * right;
+            if (temp == c) return true;
+            if (temp > c) right--;
+            else left++;
         }
         return false;
     }
@@ -188,6 +271,8 @@ public class Solution
 
     static void Main(string[] args)
     {
+        Solution s = new Solution();
+
         //Console.WriteLine(
         //SingleNumber(new[] { 1, 2, 2, 3, 3, 4, 5 })
         //    );
@@ -205,7 +290,6 @@ public class Solution
 
         //add sum of 2 linked list and store reverse number to linkedlist (2. Add Two Numbers leetcode)
 
-        //Solution s = new Solution();
         //ListNode head = new ListNode(9);
         //ListNode node2 = new ListNode(4);
         //ListNode node3 = new ListNode(3);
@@ -229,6 +313,16 @@ public class Solution
         //    result = result.next;
         //}
 
+        //find all odd number of length
+        //int[] arr = { 1, 2, 3, 4, 5 };
 
+        //s.SumOddLengthSubarrays(arr);
+
+        // sum of specialNUmber^2
+
+        //Console.WriteLine(s.SumOfSquares(new int[] { 1, 2, 3, 4 }));
+        long c = (long)Math.Sqrt(2147483645);
+        Console.WriteLine(c);
+        Console.WriteLine(s.JudgeSquareSum(2147483645));
     }
 }
