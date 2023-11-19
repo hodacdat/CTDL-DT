@@ -269,6 +269,115 @@ public class Solution
     }
 
 
+    /// <summary>
+    /// Sorting Algorithm
+    /// </summary>
+    /// <param name="args"></param>
+    /// 
+
+    //insert sort
+    public void insertSort(int[] a)
+    {
+        int i, j, last;
+        for (i = 1; i < a.Length; i++)
+        {
+            last = a[i];
+            j = i;
+            while ((j > 0) && (a[j - 1] > last))
+            {
+                a[j] = a[j - 1];
+                j = j - 1;
+            }
+            a[j] = last;
+        } // end for
+    } // end of isort
+
+    //selection sort 
+
+    public void selectionSort(int[] nums)
+    {
+        int i, j, min, temp;
+        for (i = 0; i < nums.Length - 1; i++)
+        {
+            min = i;
+            for (j = i + 1; j < nums.Length; j++)
+            {
+                if (nums[j] < nums[min]) min = j;
+            }
+            temp = nums[i];
+            nums[i] = nums[min];
+            nums[min] = temp;
+        }
+    }
+
+    //merge sort
+
+    //bubble sort
+    public void bubbleSort(int[] a, int n)
+    {
+        int i, j, temp;
+        for (i = (n - 1); i >= 0; i--)
+        {
+            for (j = 1; j <= i; j++)
+            {
+                if (a[j - 1] > a[j])
+                {
+                    //swap(a[j - 1], a[j]);
+                    temp = a[j];
+                    a[j] = a[j - 1];
+                    a[j - 1] = temp;
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Searching Algorithm
+    /// </summary>
+    /// <param name="args"></param>
+    /// 
+
+    //linear search
+
+    //binary search
+
+
+    /// <summary>
+    /// sakamoto Algorithm check day of week
+    /// </summary>
+    /// <param name="args"></param>
+    ///
+    public static int down(int y, int m, int d)
+    {
+        int[] t = { 0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4 };
+        y -= (m < 3) ? 1 : 0;
+        return (y + y / 4 - y / 100 + y / 400 + t[m - 1] + d) % 7 + 1;
+    }
+
+
+    /// <summary>
+    /// the string "AAAABBBCCDAA" would be encoded as "4A3B2C1D2A".
+    /// </summary>
+    /// <param name="args"></param>
+    /// 
+    public static void Encode(string s)
+    {
+        int indexnew = 0;
+        int count = 0;
+        int i = 0;
+        while (i < s.Length)
+        {
+            count = 0;
+            while (indexnew < s.Length && s[i] == s[indexnew])
+            {
+                count++;
+                indexnew++;
+            }
+            Console.Write(count);
+            Console.Write(s[i]);
+            i = indexnew;
+        }
+    }
     static void Main(string[] args)
     {
         Solution s = new Solution();
@@ -321,8 +430,12 @@ public class Solution
         // sum of specialNUmber^2
 
         //Console.WriteLine(s.SumOfSquares(new int[] { 1, 2, 3, 4 }));
-        long c = (long)Math.Sqrt(2147483645);
-        Console.WriteLine(c);
-        Console.WriteLine(s.JudgeSquareSum(2147483645));
+        //long c = (long)Math.Sqrt(2147483645);
+        //Console.WriteLine(c);
+        //Console.WriteLine(s.JudgeSquareSum(2147483645));
+
+        //Console.WriteLine(down(2023, 11, 18));
+
+        Encode("AAAABBBCCDAA");
     }
 }
